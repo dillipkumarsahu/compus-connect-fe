@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.caption {
+  padding: 0;
+  margin: 0;
+  line-height: 17px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.w-100 {
+  width: 100% !important;
+}

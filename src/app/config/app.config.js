@@ -5,7 +5,7 @@ const appConfig = {
     authRoute: "/",
     unAuthRoute: "/login",
   },
-  baseUrl: "http://localhost:8000",
+  baseUrl: "http://localhost:3030",
 };
 
 export default appConfig;

@@ -3,11 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Grid, Layout, theme } from 'antd';
-import {
-    AppstoreOutlined,
-    ShopOutlined,
-    TeamOutlined,
-} from '@ant-design/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import appConfig from '../../app/config/app.config';
 import TopNavBar from '../common/TopNavBar';

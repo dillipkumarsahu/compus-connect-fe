@@ -1,12 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { LogoutOutlined, UserOutlined, HomeFilled } from "@ant-design/icons";
-import { Grid, Input, message } from "antd";
+import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, Dropdown, Grid, Input, Space, message } from "antd";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { unAuthenticateReduxService } from "../../app/redux/slices/authReducer";
+import { primaryColor } from "../../app/config/theme";
+import SchoolIcon from '@mui/icons-material/School';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import SearchIcon from '@mui/icons-material/Search';
+
 const { useBreakpoint } = Grid;
 
-const items = [
+const itemsMob = [
     {
         key: '1',
         label: (
@@ -20,9 +25,17 @@ const items = [
         type: 'divider',
     },
     {
-        key: '3',
+        key: '2',
         label: 'Logout',
-        icon: <LogoutOutlined />,
+        icon: <LogoutOutlined style={{ color: 'red' }} />,
+    },
+];
+
+const itemsDesk = [
+    {
+        key: '1',
+        label: 'Logout',
+        icon: <LogoutOutlined style={{ color: 'red' }} />,
     },
 ];
 
@@ -58,7 +71,7 @@ const TopNavBar = () => {
 
     return (
         <div style={{
-            padding: '10px 50px',
+            padding: screens.lg ? '20px 50px' : screens.md ? '20px 0px' : '',
             width: '100%',
             display: 'flex',
             justifyContent: 'space-between',
@@ -72,23 +85,36 @@ const TopNavBar = () => {
                 }}>
                 <img src="./images/short-logo.svg" alt="logo" width={60} />
             </Link>
-            <Input
-                placeholder="Enter college name"
-                style={{ width: 300 }} size='large'
-                allowClear
-                enterButton
-                onSearch={onSearch}
-            />
+            {
+                screens.md
+                &&
+                <Input
+                    placeholder="Search colleges"
+                    style={{ width: screens.xl ? 500 : 400 }} size='large'
+                    allowClear
+                    enterButton
+                    onSearch={onSearch}
+                />
+            }
 
-            <div>
-                <Link to='/'>
-                    <HomeFilled style={{ fontSize: 23 }} />
+            <Space size={screens.md ? 20 : 10} style={{ color: '#000' }}>
+                {
+                    !screens.md &&
+                    <Link to='/' style={{ display: 'flex', alignItems: 'center' }}>
+                        <Button type='ghost' shape="circle" icon={<SearchIcon />} size='middle' />
+                    </Link>
+                }
+                <Link to='/' style={{ display: 'flex', alignItems: 'center' }}>
+                    <Button type='ghost' shape="circle" icon={<SchoolIcon />} size='middle' />
                 </Link>
-            </div>
-            {/* <Dropdown menu={{ items, onClick }} placement="bottomRight" arrow>
-                <Avatar style={{ backgroundColor: primaryColor, cursor: 'pointer' }} icon={<UserOutlined />} size={screens.md ? 'large' : 'default'} />
-            </Dropdown> */}
-        </div>
+                <Link to='/' style={{ display: 'flex', alignItems: 'center' }}>
+                    <Button type='ghost' shape="circle" icon={<NotificationsIcon />} size='middle' />
+                </Link>
+                <Dropdown menu={{ items: screens.md ? itemsDesk : itemsMob, onClick }} placement="bottomRight" arrow>
+                    <Avatar style={{ backgroundColor: primaryColor, cursor: 'pointer' }} icon={<UserOutlined />} size={'default'} />
+                </Dropdown>
+            </Space>
+        </div >
     )
 }
 export default TopNavBar;
